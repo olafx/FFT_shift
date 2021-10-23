@@ -15,9 +15,7 @@ void backend(T *A, size_t a, T *B, size_t b, Dim dim) noexcept
 template <typename T, typename Dim_1, typename Dim_2, typename ...Dims>
 void backend(T *A, size_t a, T *B, size_t b, Dim_1 dim_1, Dim_2 dim_2, Dims... dims) noexcept
 {   for (size_t i = 0; i < dim_1 / 2; i++)
-    {   // backend(A, (a + i)           * dim,       B, (b + i + dim / 2) * dim, dims...);
-        // backend(B, (b + i + dim / 2) * dim,       A, (a + i)           * dim, dims...);
-        backend(A, (a + i)             * dim_1, B, (b + i + dim_2 / 2) * dim_1, dim_2, dims...);
+    {   backend(A, (a + i)             * dim_1, B, (b + i + dim_2 / 2) * dim_1, dim_2, dims...);
         backend(B, (b + i + dim_2 / 2) * dim_1, A, (a + i)             * dim_1, dim_2, dims...);
     }
 }
